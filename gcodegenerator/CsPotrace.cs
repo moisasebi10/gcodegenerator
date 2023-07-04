@@ -8,6 +8,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.Security.Policy;
 using System.Security.Cryptography.Xml;
+using System.Reflection.Metadata.Ecma335;
 
 
 //Copyright (C) 2001-2016 Peter Selinger
@@ -1871,12 +1872,11 @@ namespace CsPotrace
                 adjustVertices(path);
 
                 smooth(path);
-/*                if (curveoptimizing)
-                    optiCurve(path);*/
-
             }
         tracetoList(ListOfCurveArrays);
         }
+
+
         #endregion
         #region create svg
         static string toString(double value)

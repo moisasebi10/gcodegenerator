@@ -216,7 +216,7 @@ namespace gcodegenerator
             Potrace.Potrace_Trace(TheBitmap, ListOfPathes);
 
             string gcodeCommand = "";
-            gcodeCommand = Potrace.GetGCode(8, 8);
+            gcodeCommand = Potrace.GetGCode(5, 5);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "G-code files (*.gcode)|*.gcode";

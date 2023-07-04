@@ -1953,6 +1953,34 @@ namespace CsPotrace
             return svg;
         }
 
+        public static float B3P0 (float t, float p)
+        {
+            float k = 1 - t;
+            return k * k * k * p;
+        }
+
+        public static float B3P1(float t, float p)
+        {
+            float k = 1 - t;
+            return 3 * k * k * t * p;
+        }
+
+        public static float B3P2(float t, float p)
+        {
+            float k = 1 - t;
+            return 3 * k * t * t * p;
+        }
+
+        public static float B3P3(float t, float p)
+        {
+            return 3 * t * t * t * p;
+        }
+
+        public static float bezier3(float t, float p0, float p1, float p2, float p3)
+        {
+            return B3P0(t, p0) + B3P1(t, p1) + B3P2(t, p2) + +B3P1(t, p3);
+        }
+
         public static string GetGCode(double sizex, double sizey, string opt_type = "")
         {
             string maxx = "";
@@ -1976,15 +2004,18 @@ namespace CsPotrace
                 {
                     string b = "";
 
+                    //int subdivisions = 25;
+
                     if (i == 0)
                     {
-                        b += "G21 F200 G90\nG923 X0 Y0\n";
+                        b += "G21 F200 G90\nG92 X0 Y0\n";
 
                         firstx = toString(curve.c[i * 3 + 1].x * sizex);
                         firsty = toString(curve.c[i * 3 + 1].y * sizey);
 
-                        b += "G01 X" + firstx;
+                        b += "G1 X" + firstx;
                         b += " Y0\n";
+
                     }
 
                     maxx = toString(curve.c[(i * 3) + 0].x * sizex);
@@ -1995,20 +2026,18 @@ namespace CsPotrace
                     if (yy > maxy0) maxy0 = yy;
                     if (xx < minx0) minx0 = xx;
                     if (yy < miny0) miny0 = yy;
+                    b += "G1 X" + maxx + " Y" + maxy + "\n";
 
-                    b += "G01 X" + maxx + " Y" + maxy + "\n";
                     maxx = toString(curve.c[i * 3 + 1].x * sizex);
                     maxy = toString(curve.c[i * 3 + 1].y * sizey);
-
                     xx = double.Parse(maxx);
                     yy = double.Parse(maxy);
-
                     if (xx > maxx0) maxx0 = xx;
                     if (yy > maxy0) maxy0 = yy;
                     if (xx < minx0) minx0 = xx;
                     if (yy < miny0) miny0 = yy;
+                    b += "G1 X" + maxx + " Y" + maxy + "\n";
 
-                    b += "G01 X" + maxx + " Y" + maxy + "\n";
                     maxx = toString(curve.c[i * 3 + 2].x * sizex);
                     maxy = toString(curve.c[i * 3 + 2].y * sizey);
                     xx = double.Parse(maxx);
@@ -2018,7 +2047,7 @@ namespace CsPotrace
                     if (xx < minx0) minx0 = xx;
                     if (yy < miny0) miny0 = yy;
 
-                    b += "G01 X" + maxx + " Y" + maxy + "\n";
+                    b += "G1 X" + maxx + " Y" + maxy + "\n";
                     return b;
                 }
 
@@ -2031,7 +2060,7 @@ namespace CsPotrace
 
                         firstx = toString(curve.c[i * 3 + 1].x * sizex);
                         firsty = toString(curve.c[i * 3 + 1].y * sizey);
-                        s += "G01 X" + firstx;
+                        s += "G1 X" + firstx;
                         s += " Y0\n";
                     }
 
@@ -2044,7 +2073,7 @@ namespace CsPotrace
                     if (xx < minx0) minx0 = xx;
                     if (yy < miny0) miny0 = yy;
 
-                    s += "G01 X" + maxx + " Y" + maxy + "\n";
+                    s += "G1 X" + maxx + " Y" + maxy + "\n";
                     maxx = toString(curve.c[i * 3 + 2].x * sizex);
                     maxy = toString(curve.c[i * 3 + 2].y * sizey);
                     xx = double.Parse(maxx);
@@ -2054,7 +2083,7 @@ namespace CsPotrace
                     if (xx < minx0) minx0 = xx;
                     if (yy < miny0) miny0 = yy;
 
-                    s += "G01 X" + maxx + " Y" + maxy + "\n";
+                    s += "G1 X" + maxx + " Y" + maxy + "\n";
 
                     return s;
                 }
@@ -2073,7 +2102,7 @@ namespace CsPotrace
                     }
                 }
 
-                p += "G01 X" + firstx + " Y" + firsty + "\n" + "G01 Y0\n" + "G01 X0\n";
+                p += "G1 X" + firstx + " Y" + firsty + "\n" + "G1 Y0\n" + "G1 X0\n";
                 return p;
             }
 

@@ -192,14 +192,6 @@ namespace gcodegenerator
             var imageText = textBox.Text;
 
             imageGenerator.SaveAsBmp("imageBMP.bmp", imageText);
-            /*SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "BMP files (*.bmp)|*.bmp";
-            saveFileDialog.Title = "Save BMP File";
-            saveFileDialog.FileName = "imageBMP.bmp";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                MessageBox.Show("Text to BMP conversion completed successfully!", "Conversion Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }*/
             MessageBox.Show("Text to BMP conversion completed successfully!", "Conversion Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -224,7 +216,7 @@ namespace gcodegenerator
             Potrace.Potrace_Trace(TheBitmap, ListOfPathes);
 
             string gcodeCommand = "";
-            gcodeCommand = Potrace.GetGCode(5, 5);
+            gcodeCommand = Potrace.GetGCode(8, 8);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "G-code files (*.gcode)|*.gcode";

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -42,6 +43,9 @@ namespace ImageGenerator
             var bitmapWidth = (int)retBitmapGraphics.MeasureString(text, Font).Width;
             // measure needed height for the image
             var bitmapHeight = (int)retBitmapGraphics.MeasureString(text, Font).Height;
+
+            var bitmapDimension = Math.Max(bitmapWidth, bitmapHeight);
+
             // Create the bitmap with the correct size and add padding
             Bitmap retBitmap = new Bitmap(bitmapWidth + Padding, bitmapHeight + Padding);
             // Add the colors to the new bitmap.

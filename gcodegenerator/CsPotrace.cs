@@ -687,7 +687,13 @@ namespace CsPotrace
             }
             return path;
         }
-        
+
+        /*
+         - path_final contains all paths finded and joined; at the beginning is empty;
+         - points contain all paths remained; if a path is found, is added to path_final and removed from points
+         - x and y are coordinate points from path_final (one path with all the paths found and joined)
+         - x1 and y1 are coordinate points of all points of paths remained
+         */
         private static List<Point> extractPath(List<List<Point>> points)
         {
             List<Point> pathFinal = new List<Point>();
@@ -1196,8 +1202,6 @@ namespace CsPotrace
 
         static void adjustVertices(Path path)
         {
-
-
             int m = path.m;
             int[] po = path.po;
             int n = path.len;
@@ -1867,8 +1871,8 @@ namespace CsPotrace
                 adjustVertices(path);
 
                 smooth(path);
-                if (curveoptimizing)
-                    optiCurve(path);
+/*                if (curveoptimizing)
+                    optiCurve(path);*/
 
             }
         tracetoList(ListOfCurveArrays);
@@ -2010,8 +2014,8 @@ namespace CsPotrace
                     {
                         b += "G21 F200 G90\nG92 X0 Y0\n";
 
-                        firstx = toString(curve.c[i * 3 + 1].x * sizex);
-                        firsty = toString(curve.c[i * 3 + 1].y * sizey);
+                        firstx = toString(curve.c[i * 3 + 0].x * sizex);
+                        firsty = toString(curve.c[i * 3 + 0].y * sizey);
 
                         b += "G1 X" + firstx;
                         b += " Y0\n";

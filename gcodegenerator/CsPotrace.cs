@@ -2012,8 +2012,9 @@ namespace CsPotrace
 
                     if (i == 0)
                     {
-                        b += "G21 F200 G90\nG92 X0 Y0\n";
+                        b += "G21 F300 G90\nG92 X0 Y0\nM3 S80\n";
 
+                        //start or Bezier Curve
                         firstx = toString(curve.c[i * 3 + 0].x * sizex);
                         firsty = toString(curve.c[i * 3 + 0].y * sizey);
 
@@ -2022,6 +2023,7 @@ namespace CsPotrace
 
                     }
 
+                    //First control point of Bezier Curve
                     maxx = toString(curve.c[(i * 3) + 0].x * sizex);
                     maxy = toString(curve.c[i * 3 + 0].y * sizey);
                     xx = double.Parse(maxx);
@@ -2032,6 +2034,7 @@ namespace CsPotrace
                     if (yy < miny0) miny0 = yy;
                     b += "G1 X" + maxx + " Y" + maxy + "\n";
 
+                    //Second control point of Bezier Curve
                     maxx = toString(curve.c[i * 3 + 1].x * sizex);
                     maxy = toString(curve.c[i * 3 + 1].y * sizey);
                     xx = double.Parse(maxx);
@@ -2042,6 +2045,7 @@ namespace CsPotrace
                     if (yy < miny0) miny0 = yy;
                     b += "G1 X" + maxx + " Y" + maxy + "\n";
 
+                    //Finish point Bezier Curve
                     maxx = toString(curve.c[i * 3 + 2].x * sizex);
                     maxy = toString(curve.c[i * 3 + 2].y * sizey);
                     xx = double.Parse(maxx);
@@ -2060,7 +2064,7 @@ namespace CsPotrace
                     string s = "";
                     if (i == 0)
                     {
-                        s += "G21 F500 G90\nG92 X0 Y0\n";
+                        s += "G21 F300 G90\nG92 X0 Y0\nM3 S80";
 
                         firstx = toString(curve.c[i * 3 + 1].x * sizex);
                         firsty = toString(curve.c[i * 3 + 1].y * sizey);
@@ -2106,7 +2110,7 @@ namespace CsPotrace
                     }
                 }
 
-                p += "G1 X" + firstx + " Y" + firsty + "\n" + "G1 Y0\n" + "G1 X0\n";
+                p += "G1 X" + firstx + " Y" + firsty + "\n" + "G1 Y0\n" + "G1 X0\nM5\n";
                 return p;
             }
 

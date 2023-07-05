@@ -199,7 +199,7 @@ namespace gcodegenerator
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "BMP files (*.bmp)|*.bmp";
-            openFileDialog.Title = "Select a BMP file";
+            openFileDialog.Title = "Select an image file";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -216,7 +216,7 @@ namespace gcodegenerator
             Potrace.Potrace_Trace(TheBitmap, ListOfPathes);
 
             string gcodeCommand = "";
-            gcodeCommand = Potrace.GetGCode(5, 5);
+            gcodeCommand = Potrace.GetGCode(3.5, 3.5);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "G-code files (*.gcode)|*.gcode";

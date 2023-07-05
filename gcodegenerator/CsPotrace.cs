@@ -744,12 +744,12 @@ namespace CsPotrace
 
 
                 List<Point> pointsUntilPos0 = pathFinal.GetRange(0, pos0);
-                List<Point> pointsFromPost0 = pathFinal.GetRange(pos0, pathFinal.Count - pos0);
+                List<Point> pointsFromPos0 = pathFinal.GetRange(pos0, pathFinal.Count - pos0);
 
                 pathFinal = new List<Point>();
                 pathFinal.AddRange(pointsUntilPos0);
                 pathFinal.AddRange(p);
-                pathFinal.AddRange(pointsFromPost0);
+                pathFinal.AddRange(pointsFromPos0);
             }
                  
 
@@ -1197,10 +1197,6 @@ namespace CsPotrace
 
         /* calculate "optimal" point-slope representation for each line
      segment */
-
-
-
-
         static void adjustVertices(Path path)
         {
             int m = path.m;
